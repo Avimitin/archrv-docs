@@ -58,6 +58,12 @@ diff --git PKGBUILD PKGBUILD
 +++ PKGBUILD
 ```
 
+也可以用下面这个脚本来直接去除这些字符：
+
+```bash title=console
+git diff --no-index --no-prefix PKGBUILD.orig PKGBUILD | filterdiff --clean --strip=1 > riscv64.patch
+```
+
 ## 提交 PR 的一些格式注意事项
 
 ### 数组的格式
