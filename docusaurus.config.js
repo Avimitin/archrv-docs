@@ -46,7 +46,7 @@ const config = {
         title: 'ArchRV-Manual',
         logo: {
           alt: 'ArchRV-Logo',
-          src: 'img/logo.svg',
+          src: 'img/logo.png',
         },
         items: [
           {
