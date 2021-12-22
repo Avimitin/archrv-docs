@@ -117,7 +117,3 @@ replace github.com/creack/goselect => github.com/creack/goselect v0.1.2
 
 版本号不要超过主线，尽量以催更为主。
 如果实在不行就加一行注释，提一下上游的进度，让以后维护的人有个参考。
-
-## OCaml
-
-有大量依赖 OCaml 的包过期了，等待上游滚动更新 pkgrel。
