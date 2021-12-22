@@ -3,6 +3,8 @@
 ## 阿里云上遇到 sigsegv
 
 如果在阿里云上遇到奇奇怪怪的 `segmentation fault`，
+首先确认 rustc 的[优化](./rust-related.md#编译时遇到了奇怪的-sigsegv)
+有无问题，如果查不出来问题的话，
 默认认为阿里云的虚拟化有问题。
 
 ## 把 jemallocator 换成 tikv-jemallocator
