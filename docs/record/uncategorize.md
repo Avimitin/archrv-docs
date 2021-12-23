@@ -47,8 +47,13 @@ gcc/clang应该从十几年前就要求用 -pthread 了，现在还残留的 -lp
 这个错误是因为代码被编译的时候，`CFLAG` 选项多了一个 `-Wno-format`，这个选项会关闭
 `-Wformat`，但 `-Werror=format-security` 仍然保留着。
 
-解决方案是使用 `${CFLAG// -Wno-format /}` 或者 `sed -i 's/ -Wno-format //` 把这个
-选项删除。
+解决方案首先是让上游修，然后引用 patch，参考上面那一章节。
+
+如果是一万年不更新的代码仓库，那可以酌情使用
+`${CFLAG#-Werror=format-security}` 或者 `sed -i 's/ -Werror=format-security // Makefile`
+把这个选项删除。
+
+但是尽量现在群里讨论，问问前辈的意见。
 
 ## 如何快捷生成 sum
 
