@@ -40,6 +40,16 @@ gcc/clang应该从十几年前就要求用 -pthread 了，现在还残留的 -lp
 不过如果是 -fcommon 这种，比较推荐的是先提给上游，咱们patch着打。
 这样下次上游发版本arch那边更新的时候，就会莫名其妙好了，他们不用做什么，我们也只用删掉patch。
 
+## -Wno-format
+
+如果遇到
+`cc1: error: -Wformat-security ignored without -Wformat [-Werror=format-security]`，
+这个错误是因为代码被编译的时候，`CFLAG` 选项多了一个 `-Wno-format`，这个选项会关闭
+`-Wformat`，但 `-Werror=format-security` 仍然保留着。
+
+解决方案是使用 `${CFLAG// -Wno-format /}` 或者 `sed -i 's/ -Wno-format //` 把这个
+选项删除。
+
 ## 如何快捷生成 sum
 
 用 [updpkgsums](https://archlinux.org/packages/community/x86_64/pacman-contrib/)
