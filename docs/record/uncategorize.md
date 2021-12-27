@@ -139,3 +139,8 @@ replace github.com/creack/goselect => github.com/creack/goselect v0.1.2
 
 > 详细参考 ghc bootstrap Patch:
 > https://github.com/felixonmars/archriscv-packages/pull/17/commits/36279fff5314fbcd212549ede73db5257ef10b1d
+
+## Intel related
+
+Intel 的一些包，没留 Generic 实现，只有 x86 simd 的，比如 hyperscan，
+这种包就直接跳过不管了。
