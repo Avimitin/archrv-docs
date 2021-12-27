@@ -132,3 +132,10 @@ replace github.com/creack/goselect => github.com/creack/goselect v0.1.2
 
 版本号不要超过主线，尽量以催更为主。
 如果实在不行就加一行注释，提一下上游的进度，让以后维护的人有个参考。
+
+## 循环依赖
+
+有些包可以一起打，但在状态页上显示互相缺了对方，这种需要 bootstrap。
+
+> 详细参考 ghc bootstrap Patch:
+> https://github.com/felixonmars/archriscv-packages/pull/17/commits/36279fff5314fbcd212549ede73db5257ef10b1d
