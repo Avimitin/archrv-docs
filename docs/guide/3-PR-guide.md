@@ -140,3 +140,8 @@ md5sums=('286e427b10f4d10aaeef1944210a2ea6'
 现在 GitHub 也已经提供了超链接跳转，点击即可跳转。
 
 ![image](../asserts/github-pr-patch-button.png)
+
+## 本地版本过老
+
+假设发布的版本特别晚，引用 patch 会行数不对应冲突的话，优先发 issue
+催上游发新版本。
