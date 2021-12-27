@@ -1,17 +1,11 @@
-# Website
+# Arch RV Manual
 
 This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
-
-### Installation
-
-```
-$ yarn
-```
 
 ### Local Development
 
 ```
-$ yarn start
+$ npx docusaurus start
 ```
 
 This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
@@ -19,23 +13,38 @@ This command starts a local development server and opens up a browser window. Mo
 ### Build
 
 ```
-$ yarn build
+$ npm run build
 ```
 
 This command generates static content into the `build` directory and can be served using any static contents hosting service.
 
-### Deployment
+### Contribute Guide
 
-Using SSH:
+I am using my own commit convention, you can read it here.
 
+TL;DR:
+  - new means new update
+  - rwt means rewrite, similar to refactor
+  - fix means a fix commit
+  - odd means it is a trivial commit (this commit don’t affect the code)
+  - ! means breaking change
+
+### File Structure
+
+```text
+.
+├── blog                 <- Blog
+├── docs
+│  ├── asserts           <- Asserts for documents
+│  ├── guide             <- Category guide
+│  ├── intro.md          <- Index page
+│  └── record            <- Category record
+├── docusaurus.config.js <- Project config
+├── sidebars.js          <- Sidebars config
+├── src
+│  ├── components        <- Partial pages
+│  ├── css
+│  └── pages             <- Webpage written in React
+└── static
+   └── img
 ```
-$ USE_SSH=true yarn deploy
-```
-
-Not using SSH:
-
-```
-$ GIT_USER=<Your GitHub username> yarn deploy
-```
-
-If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
