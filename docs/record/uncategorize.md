@@ -29,6 +29,20 @@ Firefox 的话，引入 lld 会带来另外的问题。lld 是需要默认关闭
 gcc/clang应该从十几年前就要求用 -pthread 了，现在还残留的 -lpthread
 绝大多数是写错了。
 
+给上游提交的时候可以说：
+
+```text
+This has been already discussed lengthly in GCC.
+The answer is that -lpthead is only linking with the thread library,
+while -pthread actually means enabling thread support,
+which includes in the case of riscv64 -latomic,
+but also correctly define some macros when compiling code.
+In short this is not considered as a GCC bug.
+```
+
+StackOverflow 也有相关讨论：
+  https://stackoverflow.com/questions/23250863/difference-between-pthread-and-lpthread-while-compiling
+
 ## -fno-common
 
 **Q**: -fno-common 取代了 -fcommon, 这种情况优先 -fno-common 还是 patch source？
