@@ -18,15 +18,15 @@ $ npm run build
 
 This command generates static content into the `build` directory and can be served using any static contents hosting service.
 
-### Contribute Guide
+### About commit message
 
-I am using my own commit convention, you can read it here.
+I am using my own commit convention, you can read it [here](https://commit-convention.sh1mar.in/).
 
 TL;DR:
   - new means new update
   - rwt means rewrite, similar to refactor
   - fix means a fix commit
-  - odd means it is a trivial commit (this commit don’t affect the code)
+  - odd means this commit don’t affect the main project, like CI, build script or other stuff.
   - ! means breaking change
 
 ### File Structure
