@@ -48,7 +48,7 @@ repository 找这个包相关的 PR
 
 `/unmark PKGNAME` `STATUS`
 
-* kbd:[/unmark] 用法：
+* /unmark 用法：
 
 `/mark pkg status`
 
