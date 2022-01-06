@@ -20,6 +20,13 @@ repository 找这个包相关的 PR
 
 ### Q&A
 
+* 修是怎么一个流程呢？
+
+在 devtools 的打包教程里，你应该用过了 asp 这个工具。
+修包的流程和那个流程相似，具体就是 `asp checkout`，进入 trunk 文件夹，
+修改 PKGBUILD 或者源码尝试构建并运行。修好之后：把修好的源码发回上游/
+把 PKGBUILD 的补丁发到肥猫仓库。
+
 * 有的包有 FTBFS 状态，但是却能在本地成功构建
 
 可能是版本更新之类的问题，使用机器人命令 `/mark PACKAGE ready`
