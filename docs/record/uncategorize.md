@@ -164,3 +164,20 @@ Intel 的一些包，没留 Generic 实现，只有 x86 simd 的，比如 hypers
 使用 qmake 构建的包构建时提示 `Could not find qmake spec 'default'.`
 
 这种情况目前需要去板子上打包。
+
+## XX is not available for the 'riscv64' architecture
+
+有些包需要修改 arch 的值才能编译，
+否则会遇到 `==> ERROR: cern-vdt is not available for the 'riscv64' architecture`。
+
+但请不要把 arch 改为 any，这里填 `riscv64` 即可。
+
+你可以用 sed 快速替换值：
+
+```console title=console
+# sed doesn't support Extend RegEx(ERE) by default, need `-E` option to manually enable
+sed -E "s/arch=\('?x86_64'?\)/arch=\('riscv64'\)/"
+```
+
+还有请注意
+[不要提交修改后的 arch](../guide/PR-guide#%E4%B8%8D%E8%A6%81%E6%8F%90%E4%BA%A4-archany)
