@@ -22,24 +22,28 @@ repository 找这个包相关的 PR
 
 * 有的包有 FTBFS 状态，但是却能在本地成功构建
 
-可能是版本更新之类的问题，使用机器人命令 /mark `PACKAGE ready`
+可能是版本更新之类的问题，使用机器人命令 `/mark PACKAGE ready`
 标记这个包为等待状态。
+
+---
+
+或者这个包原本依赖过时，现在又能用了，那也可以标记 ready。(仍需讨论)
 
 * 修复了几次也修不好
 
-/mark `PKGNAME stuck`
+`/mark PKGNAME stuck`
 
 * 释放一个包裹
 
-/merge `PKGNAME`
+`/merge PKGNAME`
 
 * 撤销标记
 
-/unmark `PKGNAME` `STATUS`
+`/unmark PKGNAME` `STATUS`
 
 * kbd:[/unmark] 用法：
 
-/mark `pkg` `status`
+`/mark pkg status`
 
 * 什么时候标记 QEMU？
 
