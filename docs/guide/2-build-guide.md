@@ -27,6 +27,25 @@ repository 找这个包相关的 PR
 修改 PKGBUILD 或者源码尝试构建并运行。修好之后：把修好的源码发回上游/
 把 PKGBUILD 的补丁发到肥猫仓库。
 
+> Reference
+>
+> https://github.com/felixonmars/archriscv-packages/wiki/asp-%E4%BD%BF%E7%94%A8%E5%8F%82%E8%80%83
+
+* 怎么构建 PKGBUILD 呢？
+
+假设你要构建 `PACKAGE` 这个包，用 `asp checkout PACKAGE` 之后，当前目录
+会有一个同名的文件夹。用 `cd PACKAGE/trunk` 进入文件夹之后，把 arch 修改成
+riscv [`(ref)`](../record/uncategorize#xx-is-not-available-for-the-riscv64-architecture)
+之后，创建一个干净的文件夹，使用 extra-riscv64-build 进行构建。
+
+```console title=console
+# Create a temporary directory and add the path to variable BUILD_DIR
+export BUILD_DIR=$(mktemp -d -t "pacman_cache_$(date +%m%d)_XXX")
+
+# Use the temporary directory to store pacman cache
+extra-riscv64-build -- -d "$BUILD_DIR:/var/cache/pacman/pkg"
+```
+
 * 有的包有 FTBFS 状态，但是却能在本地成功构建
 
 可能是版本更新之类的问题，使用机器人命令 `/mark PACKAGE ready`
