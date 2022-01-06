@@ -158,3 +158,9 @@ replace github.com/creack/goselect => github.com/creack/goselect v0.1.2
 
 Intel 的一些包，没留 Generic 实现，只有 x86 simd 的，比如 hyperscan，
 这种包就直接跳过不管了。
+
+## Qmake
+
+使用 qmake 构建的包构建时提示 `Could not find qmake spec 'default'.`
+
+这种情况目前需要去板子上打包。
