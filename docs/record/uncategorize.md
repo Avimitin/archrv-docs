@@ -181,3 +181,12 @@ sed -i -E "s/arch=\('?x86_64'?\)/arch=\('riscv64'\)/" PKGBUILD
 
 还有请注意
 [不要提交修改后的 arch](../guide/PR-guide#%E4%B8%8D%E8%A6%81%E6%8F%90%E4%BA%A4-archany)
+
+## msse
+
+Error: `c++: error: unrecognized command-line option '-msse'`
+
+这是因为 -msse 这个编译选项暂时还不支持 `x86_64` 以外的 Arch，
+你需要查看一下这个项目的 CMakeList 选项，暂时把他关闭。
+
+比如 `cmake -DSSE=OFF`。
