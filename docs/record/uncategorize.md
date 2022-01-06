@@ -176,7 +176,7 @@ Intel 的一些包，没留 Generic 实现，只有 x86 simd 的，比如 hypers
 
 ```console title=console
 # sed doesn't support Extend RegEx(ERE) by default, need `-E` option to manually enable
-sed -E "s/arch=\('?x86_64'?\)/arch=\('riscv64'\)/"
+sed -i -E "s/arch=\('?x86_64'?\)/arch=\('riscv64'\)/" PKGBUILD
 ```
 
 还有请注意
