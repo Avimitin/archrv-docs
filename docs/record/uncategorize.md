@@ -190,3 +190,17 @@ Error: `c++: error: unrecognized command-line option '-msse'`
 你需要查看一下这个项目的 CMakeList 选项，暂时把他关闭。
 
 比如 `cmake -DSSE=OFF`。
+
+## Unknown public key `[a-zA-Z0-9]+`
+
+这是因为本地的 gpg 数据库没有这个开发者的公钥。你可以用命令
+`gpg --recv-key keyid` 下载并导入这个 key。
+
+---
+
+如果遇到了 `gpg: keyserver receive failed: No data` 这样的错误，
+大概率是 keyserver 被橄榄了。建议直接去项目主页找他们的 public key
+手动导入。
+
+> sks pool 因为是单增的，无法满足 GDPR 对被遗忘权的规定，
+> 被欧盟法律橄榄了。
