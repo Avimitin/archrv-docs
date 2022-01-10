@@ -80,8 +80,10 @@ StackOverflow 也有相关讨论：
 
 首先，优先给上游发补丁。从 manpage 也可以看的出来，只需要把 `printf` 改成 `printf("%s")` 的形式即可。
 
-如果是很难搞的上游，或者是十几年没动静的上游，那可以选择把这个选项删掉。
-比如 `CFLAGS=${CFLAGS/-Werror=format-security/}`
+除非上游十多年没动静，才可以选择把这个选项删掉。
+可以用： `CFLAGS=${CFLAGS/-Werror=format-security/}`
+
+如果上游很难沟通，或者上游代码不太好修，优先自己修，然后和群里的前辈商量一下解决方案。
 
 > Reference:
 > https://github.com/felixonmars/archriscv-packages/pull/559
