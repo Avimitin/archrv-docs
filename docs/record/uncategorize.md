@@ -69,6 +69,23 @@ StackOverflow 也有相关讨论：
 
 但是尽量现在群里讨论，问问前辈的意见。
 
+## -Werror=format-security
+
+```text title=manpage
+-Wformat-security
+   If -Wformat is specified, also warn about uses of format functions that represent possible security problems.  At present, this warns about calls to "printf" and "scanf" functions where the
+   format string is not a string literal and there are no format arguments, as in "printf (foo);".  This may be a security hole if the format string came from untrusted input and contains %n.
+   (This is currently a subset of what -Wformat-nonliteral warns about, but in future warnings may be added to -Wformat-security that are not included in -Wformat-nonliteral.)
+```
+
+首先，优先给上游发补丁。从 manpage 也可以看的出来，只需要把 `printf` 改成 `printf("%s")` 的形式即可。
+
+如果是很难搞的上游，或者是十几年没动静的上游，那可以选择把这个选项删掉。
+比如 `CFLAGS=${CFLAGS/-Werror=format-security/}`
+
+> Reference:
+> https://github.com/felixonmars/archriscv-packages/pull/559
+
 ## 如何快捷生成 sum
 
 用 [updpkgsums](https://archlinux.org/packages/community/x86_64/pacman-contrib/)
