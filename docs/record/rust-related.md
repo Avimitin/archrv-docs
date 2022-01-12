@@ -109,3 +109,7 @@ features = ["serde"]
 Example: `signal:11, SIGSEGV: invalid memory reference` 。
 
 可能的解决方案：把 `opt-level` 调低到 2 或者 1 试试。
+
+### libicuuc not found/OCaml
+
+icu 滚动更新之后炸了。先暂停 rustc 相关的工作吧
