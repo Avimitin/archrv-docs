@@ -35,7 +35,7 @@ repository 找这个包相关的 PR
 
 假设你要构建 `PACKAGE` 这个包，用 `asp checkout PACKAGE` 之后，当前目录
 会有一个同名的文件夹。用 `cd PACKAGE/trunk` 进入文件夹之后，把 arch 修改成
-riscv [`(ref)`](../record/uncategorize#xx-is-not-available-for-the-riscv64-architecture)
+riscv [`(ref)`](../record/collection#xx-is-not-available-for-the-riscv64-architecture)
 之后，创建一个干净的文件夹，使用 extra-riscv64-build 进行构建。
 
 ```console title=console

@@ -27,4 +27,4 @@ wget -c https://archriscv.felixc.at/images/archriscv-20210601.tar.zst
 ## 开始修包！
 
 上面两步做好之后就可以开始修包了。
-详细请看 [构建相关] 。
+详细请看 [构建相关](./2-build-guide.md) 。
