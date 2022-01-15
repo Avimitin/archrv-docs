@@ -43,6 +43,11 @@ In short this is not considered as a GCC bug.
 StackOverflow 也有相关讨论：
   https://stackoverflow.com/questions/23250863/difference-between-pthread-and-lpthread-while-compiling
 
+---
+
+关于如何跟上游对线的参考：
+<https://github.com/juce-framework/JUCE/issues/995>
+
 ## -fno-common
 
 **Q**: -fno-common 取代了 -fcommon, 这种情况优先 -fno-common 还是 patch source？
