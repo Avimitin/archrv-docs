@@ -11,12 +11,13 @@
 
 1. 在 [archlinuxriscv](https://github.com/felixonmars/archriscv-packages)
 repository 找这个包相关的 PR
-2. 在 https://plct-archrv.ax64.workers.dev/
+2. 在工会页 https://plct-archrv.ax64.workers.dev/
 上查看这个包的状态（是否有人在处理了）
 3. 使用命令 /add `{PKGNAME}` 领取这个包
 4. 修复
 5. 提交 PR 并等待合并
 6. 使用命令 /merge `{PKGNAME}` 释放包裹
+
 
 ### Q&A
 
@@ -79,9 +80,31 @@ extra-riscv64-build -- -d "$BUILD_DIR:/var/cache/pacman/pkg"
 
 依赖（包）过期了，需要在repo里滚/上游滚。
 
-* 可用的 status 包括
+* 可用的 mark 包括
 
 unknown, upstreamed, outdated, outdated_dep, stuck, noqemu, ready, pending
+
+* 工会页的可用查询参数
+
+工会页支持 URL 查询参数，可用的参数有
+
+* name: 包名，user: 用户名，
+* work: 目前工作状态 (merged, working, pull requested)，
+* mark: 包的标记 (和 bot 的标记一样)，
+* mkby: 打标记的人名 (可以用来追踪 outdated)，
+* sort: 可以 sort=name, sort=user, sort=mark, sort=work...。
+
+比如你要查询谁打过标记：
+
+```text
+https://plct-archrv.ax64.workers.dev/?mkby=*-x64,%E7%93%9C
+```
+
+比如你想让工会页以工作状态排序：
+
+```text
+https://plct-archrv.ax64.workers.dev/?sort=work
+```
 
 ## Leaf package, port it!
 
