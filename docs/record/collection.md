@@ -229,6 +229,13 @@ Error: `c++: error: unrecognized command-line option '-msse'`
 > sks pool 因为是单增的，无法满足 GDPR 对被遗忘权的规定，
 > 被欧盟法律橄榄了。
 
+---
+
+如果实在是找不到 key，可以用参数 `--skippgpcheck` 暂时跳过检查。
+
+或者可以参考这个：
+<https://github.com/archlinuxcn/lilac/blob/master/recv_gpg_keys>
+
 ## Electron
 
 v8 版本低于 9.0 的就不用修了，从 9.0 开始有实验性的 risc-v 支持。
