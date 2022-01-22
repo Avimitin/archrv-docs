@@ -88,11 +88,11 @@ unknown, upstreamed, outdated, outdated_dep, stuck, noqemu, ready, pending
 
 工会页支持 URL 查询参数，可用的参数有
 
-* name: 包名，user: 用户名，
-* work: 目前工作状态 (merged, working, pull requested)，
-* mark: 包的标记 (和 bot 的标记一样)，
-* mkby: 打标记的人名 (可以用来追踪 outdated)，
-* sort: 可以 sort=name, sort=user, sort=mark, sort=work...。
+  * name: 包名，user: 用户名，
+  * work: 目前工作状态 (merged, working, pull requested)，
+  * mark: 包的标记 (和 bot 的标记一样)，
+  * mkby: 打标记的人名 (可以用来追踪 outdated)，
+  * sort: 可以 sort=name, sort=user, sort=mark, sort=work...。也可以组合使用
 
 比如你要查询谁打过标记：
 
