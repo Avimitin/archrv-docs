@@ -76,9 +76,9 @@ gcc 的 1B 2B atomic 实现在 riscv64 有问题。gcc 的 1B 2B atomic 实现�
 > While the RISC-V gcc port does need to be fixed, it is still true that you
 > should be using -pthread instead of -lpthread.
 
-除此之外还有一个很诡异的事情：就是在 gcc 里，std::atomic<bool>::is_always_lock_free
-是 false，std::atomic<int>::is_always_lock_free 是 true。但是如果你在运行的时候
-整一个 bool b; std::atomic_is_lock_free(&b)，你会发现它是 true，而且是，不管怎么试，
+除此之外还有一个很诡异的事情：就是在 gcc 里，`std::atomic<bool>::is_always_lock_free`
+是 false，`std::atomic<int>::is_always_lock_free` 是 true。但是如果你在运行的时候
+整一个 bool b; `std::atomic_is_lock_free(&b)`，你会发现它是 true，而且是，不管怎么试，
 在哪试，它都是 true。
 
 在 gcc 里面大概 ATOMIC_BOOL_LOCK_FREE 是 1（1 for the built-in atomic types
@@ -98,14 +98,16 @@ that are sometimes lock-free)
 >
 > Your analysis is basically correct, but I would add that ICC's behavior here is
 > unsound (it only appears to "implement[] this behavior correctly" in simple cases)
-> whereas the GCC/Clang behavior is sound but surprising. For GCC, ICC, and Clang, identity
-> <fp> and identity<float> are the same type. Therefore it's not possible for identity
-> <fp>::type and identity<float>::type to have different alignments, because they're
+> whereas the GCC/Clang behavior is sound but surprising. For GCC, ICC, and Clang, `identity <fp>`
+> and `identity<float>` are the same type. Therefore it's not possible for `identity <fp>::type`
+> and `identity<float>::type` to have different alignments, because they're
 > the same type. So, for an example such as this:
 
-    typedef float fp  __attribute__((aligned(16)));
-    std::cout << alignof(typename identity<fp>::type) << std::endl;
-    std::cout << alignof(typename identity<float>::type) << std::endl;
+```cpp
+typedef float fp  __attribute__((aligned(16)));
+std::cout << alignof(typename identity<fp>::type) << std::endl;
+std::cout << alignof(typename identity<float>::type) << std::endl;
+```
 
 > under GCC and Clang, both lines print out 4, whereas under ICC, they either both
 > print out 4 or both print out 16 depending on which one happens to appear first
