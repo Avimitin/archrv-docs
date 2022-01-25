@@ -48,6 +48,79 @@ StackOverflow 也有相关讨论：
 关于如何跟上游对线的参考：
 <https://github.com/juce-framework/JUCE/issues/995>
 
+## gcc atomic
+
+gcc 的 1B 2B atomic 实现在 riscv64 有问题。gcc 的 1B 2B atomic 实现需要跑到 libatomic，
+于是没法在编译期判断是否无锁
+
+> ref: https://code.videolan.org/videolan/vlc/-/issues/20683
+>
+> The GCC docs make it clear that -pthread is the correct way to use the pthread
+> library on POSIX systems.  Not only does it add extra necessary linker options
+> for some targets, but it also adds some extra necessary preprocessor options
+> for many targets.  There is also the issue that the library is called -lpthread
+> on some systems, and -lpthreads on others.  The -pthread option handles this
+> correctly.
+>
+> **It is a known problem that the RISC-V gcc atomic support needs more work.
+> RISC-V only supports 4 and 8 byte atomic operations in hardware.  1 and 2 byte
+> operations are implemented using instruction sequences with locks, and this is
+> currently done via a call into libatomic.**  However, mixing lock free and
+> non-locking atomic sequences can potentially cause run-time failures.  We need
+> to instead emit instruction sequences using 4 and/or 8 byte atomic instructions
+> without locks.  This is on the list of things that need to be fixed, but there
+> are a lot of things that need to be fixed and we haven't gotten around to
+> fixing this one yet.  This definitively needs to be fixed before gcc 9, and
+> hopefully much sooner than that.
+>
+> While the RISC-V gcc port does need to be fixed, it is still true that you
+> should be using -pthread instead of -lpthread.
+
+除此之外还有一个很诡异的事情：就是在 gcc 里，std::atomic<bool>::is_always_lock_free
+是 false，std::atomic<int>::is_always_lock_free 是 true。但是如果你在运行的时候
+整一个 bool b; std::atomic_is_lock_free(&b)，你会发现它是 true，而且是，不管怎么试，
+在哪试，它都是 true。
+
+在 gcc 里面大概 ATOMIC_BOOL_LOCK_FREE 是 1（1 for the built-in atomic types
+that are sometimes lock-free)
+
+> ref: https://www.mail-archive.com/gcc-bugs@gcc.gnu.org/msg664254.html
+>
+> tldr: 只能等 gcc 的人实现 sub-word lock-free atomic 了
+>
+> All atomic types except for std::atomic_flag may be implemented using mutexes
+> or other locking operations, rather than using the lock-free atomic CPU
+> instructions. Atomic types are also allowed to be sometimes lock-free, e.g. if
+> only aligned memory accesses are naturally atomic on a given architecture,
+> misaligned objects of the same type have to use locks.
+>
+> Thanks for the detailed writeup!
+>
+> Your analysis is basically correct, but I would add that ICC's behavior here is
+> unsound (it only appears to "implement[] this behavior correctly" in simple cases)
+> whereas the GCC/Clang behavior is sound but surprising. For GCC, ICC, and Clang, identity
+> <fp> and identity<float> are the same type. Therefore it's not possible for identity
+> <fp>::type and identity<float>::type to have different alignments, because they're
+> the same type. So, for an example such as this:
+
+    typedef float fp  __attribute__((aligned(16)));
+    std::cout << alignof(typename identity<fp>::type) << std::endl;
+    std::cout << alignof(typename identity<float>::type) << std::endl;
+
+> under GCC and Clang, both lines print out 4, whereas under ICC, they either both
+> print out 4 or both print out 16 depending on which one happens to appear first
+> in the program (and in general you can encounter ODR violations when using ICC despite
+> there being nothing wrong at the source level).
+
+> Fundamentally, the 'aligned' attribute is a GCC extension, so the GCC folks get
+> to define how it works. And they chose that instead of it resulting in a different
+> type that's *almost* like the original type (for example, treating it as a type
+> qualifier), it results in the same type, but that in some contexts that same type
+> behaves differently. That's a semantic disaster, but it's what we live with. And
+> in particular, the only way for template instantiation to be sound in the presence
+> of this semantic disaster is for it to ignore all such attributes on template type
+> arguments.
+
 ## -fno-common
 
 **Q**: -fno-common 取代了 -fcommon, 这种情况优先 -fno-common 还是 patch source？
@@ -239,3 +312,25 @@ Error: `c++: error: unrecognized command-line option '-msse'`
 ## Electron
 
 v8 版本低于 9.0 的就不用修了，从 9.0 开始有实验性的 risc-v 支持。
+
+## node-sass
+
+node-sass v6 就是不支持 node v17 的，node-sass 对 njs v17 的支持始于版本 7.0.0，
+6.x 支持的 njs version：12, 14, 15, 16，所以要么就把 dependency 从 nodejs 改成 nodejs-lts-gallium，
+要么就催上游更新 package.json 里 node-sass 的版本，which is nonsense，因为大版本号的更新往往带来不兼容。
+
+## 关于 upstream
+
+如果上游的 maintainer 是肥猫的话，可以直接在群里 @ 肥猫。
+
+## Python 2to3
+
+Python 的包不管 major version 都要跑一次 2to3。
+
+## 测试
+
+如果有的包不在乎测试是否通过，比如 `test || echo`，那就直接把测试注释掉。
+
+## 访问一些会在编译期被删除的文件
+
+有一个比较脏的做法：往 PKGBUILD 里塞一个 bash，然后就用这个 subshell 来交互。
