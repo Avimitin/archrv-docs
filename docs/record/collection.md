@@ -241,6 +241,10 @@ replace github.com/creack/goselect => github.com/creack/goselect v0.1.2
 > 具体参考：
 > https://github.com/felixonmars/archriscv-packages/pull/387/commits/ad0e66c31b21efd93fff93be8cce5b9e13b59953
 
+### 编译 golang 包的时候经常卡死
+
+QEMU 的锅，直接杀掉重新开始。
+
 ## 版本号
 
 版本号不要超过主线，尽量以催更为主。
