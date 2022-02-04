@@ -9,15 +9,20 @@
 ### riscv64gc-unknown-linux-gnu
 
 这个问题源自于 Rust 和 LLVM 的 Triple 定义不一致。
+Rust 学 GCC 搞 `rv64<ext>` 这样的风格。
 前者是 `riscv64gc-unknown-linux-gnu`，
 而后者是 `riscv64-unknown-linux-gnu`。
 
 可行的解决方法是用一个 if 语句把传参换成 `riscv64-...`。
 
+修复的方式可以参考这个：
+https://github.com/alexcrichton/cc-rs/pull/428/files
+
 > References:
 >
 > - https://github.com/sodiumoxide/sodiumoxide/pull/474/commits/6dd994493ac592cf59798df75c293c6212c973a9#diff-6651588311ef4e5d49026d64fe43063739e047195958490a79c64146a719bd28R152
 > - https://github.com/rust-lang/rust/issues/62117
+> - https://github.com/lowRISC/riscv-llvm/blob/master/0002-RISCV-Recognise-riscv32-and-riscv64-in-triple-parsin.patch
 
 ### Cargo component is not applicable...
 
