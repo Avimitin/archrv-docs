@@ -340,3 +340,22 @@ Python 的包不管 major version 都要跑一次 2to3。
 ## 访问一些会在编译期被删除的文件
 
 有一个比较脏的做法：往 PKGBUILD 里塞一个 bash，然后就用这个 subshell 来交互。
+
+## gcc nostdlib
+
+`-nostdlib` 会覆盖 `-pthread`
+
+## glibc optimization
+
+```text
+error: glibc cannot be compiled without optimization
+```
+
+solution: 加上 `-O1`
+
+## patch hunk offset
+
+**Q:** 平时更新 patch 的时候，如果有代码的 patch hunk 飘了，能打上但是有 offset，需要
+把 patch 更新成最新的行号吗？
+
+**A:** 不需要
