@@ -359,3 +359,22 @@ solution: 加上 `-O1`
 把 patch 更新成最新的行号吗？
 
 **A:** 不需要
+
+## unguarded-availability-new
+
+Error:
+```text
+cc1plus: error: ‘-Werror=unguarded-availability-new’: no option ‘-Wunguarded-availability-new’
+```
+
+这个选项只有 clang 才有，如果没有强制使用 GNU 的构建工具，
+可以设置环境变量 `CC=clang CXX=clang++` 强制使用 clang 来编译。
+
+如果这个项目用的 cmake，可以加两个参数：
+
+```text
+"-DCMAKE_C_COMPILER=clang"
+"-DCMAKE_CXX_COMPILER=clang++"
+```
+
+同时记得给上游报 BUG 让他们默认使用 clang 来编译。
