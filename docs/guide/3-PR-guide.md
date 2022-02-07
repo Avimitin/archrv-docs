@@ -14,6 +14,9 @@
 特别是添加 make 参数， 修改 cflags 之类的。
 需要写一下这么修改的原因
 
+4. 如果这个 patch 应该需要反馈上游或者交给 Arch，要在
+改动里注明给上游的 PR 的链接，或者给 Arch 的 BUG Report 链接。
+
 ## 如何创建 patch
 
 ### 还未 stage 修改
