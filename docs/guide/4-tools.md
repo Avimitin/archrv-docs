@@ -11,6 +11,14 @@
 
 可以用 `extra-riscv64-build -c`，他会检查有没有别人在干活，然后再删除。
 
+* 如何给不同的架构加不同的编译依赖？
+
+PKGBUILD 支持 `makedepened_{architecture}` 这样的依赖声明，因此你可以给
+不同的架构声明不同的依赖。
+
+具体可以参考酸鸽的这个 PR：
+https://github.com/felixonmars/archriscv-packages/pull/752/commits/104ffb2b0652343ad9bcfba4686cbda39c8eb31d
+
 ## makechrootpkg
 
 * 如何把不在仓库里的依赖塞进编译环境里
