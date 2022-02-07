@@ -378,3 +378,13 @@ cc1plus: error: ‘-Werror=unguarded-availability-new’: no option ‘-Wunguard
 ```
 
 同时记得给上游报 BUG 让他们默认使用 clang 来编译。
+
+## tarball URL 变了该怎么办
+
+给 Arch 交 BUG
+
+## 在 QEMU 内构建失败但在板子上构建成功怎么处理
+
+标记这个包为 noqemu，同时往 repo 里的 qemu-user-blacklist.txt 里加入这个包。
+
+Ref: <https://github.com/felixonmars/archriscv-packages/blob/master/qemu-user-blacklist.txt>
