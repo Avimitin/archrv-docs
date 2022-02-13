@@ -245,6 +245,17 @@ replace github.com/creack/goselect => github.com/creack/goselect v0.1.2
 
 QEMU 的锅，直接杀掉重新开始。
 
+### bad pointer
+
+```text
+runtime: bad pointer in frame ... at 0x...
+fatal error: invalid pointer found on stack
+```
+
+可以跟踪一下这个 issue: <https://github.com/golang/go/issues/51101>
+
+以后 go build 的时候加上这个 flag `-gcflags=all="-N -l"`，并且往上面那个 issue 报一下。
+
 ## 版本号
 
 版本号不要超过主线，尽量以催更为主。
