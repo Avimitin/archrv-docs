@@ -399,3 +399,15 @@ cc1plus: error: ‘-Werror=unguarded-availability-new’: no option ‘-Wunguard
 标记这个包为 noqemu，同时往 repo 里的 qemu-user-blacklist.txt 里加入这个包。
 
 Ref: <https://github.com/felixonmars/archriscv-packages/blob/master/qemu-user-blacklist.txt>
+
+## invalid or corrupted package (pgp signature)
+
+如果在构建 any 包的时候遇到这个问题，可能是因为缓存冲突问题。
+x86_64 和 riscv64 下的 any 包的名字是一样的，但是这两个的签名不同。
+如果有人构建包的时候没建缓存目录，完事儿了也没删掉，
+当构建的时候用到了别人的缓存就会出现这个问题。
+
+解决方案：
+
+- 自建 cache 目录
+- 删了缓存重新跑构建
