@@ -128,7 +128,7 @@ extra-riscv64-build -- -d "$CACHE_DIR:/var/cache/pacman/pkg"
 
 unknown, upstreamed, outdated, outdated_dep, stuck, noqemu, ready, pending
 
-* 工会页的可用查询参数
+## 工会页的可用查询参数
 
 工会页支持 URL 查询参数，可用的参数有
 
