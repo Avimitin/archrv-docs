@@ -152,3 +152,8 @@ https://plct-archrv.ax64.workers.dev/?sort=work
 这些是尚未来得及构建的包，如果没什么好修的包，你可以处理一下他们。
 
 如果构建失败，那么就把这个包当作 FTBFS 来修，如果构建成功，标记一个 ready 通知肥猫即可。
+
+# rotten
+
+rotten 代表原来这个包的 patch 打不上了。这通常是因为 Arch Linux 的上游 PKGBUILD 更新了导致
+patch 对不上位置。这样的包有很多，而且通常很简单，请尽量修复。
