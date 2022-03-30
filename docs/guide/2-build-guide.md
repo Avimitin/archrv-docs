@@ -111,6 +111,14 @@ extra-riscv64-build -- -d "$CACHE_DIR:/var/cache/pacman/pkg"
 
 依赖（包）过期了，需要在repo里滚/上游滚。
 
+注意：现在机器人会自动检查依赖并自动 unmark outdated 了，你需要用特殊的语法来标记依赖：
+
+```text
+/mark xxx outdated_dep [aaa]
+```
+
+当 aaa 更新的时候，xxx 这个包就会被自动解除依赖过期标记，同时你也会被通知。
+
 * 可用的 mark 包括
 
 unknown, upstreamed, outdated, outdated_dep, stuck, noqemu, ready, pending
