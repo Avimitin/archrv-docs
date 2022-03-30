@@ -70,6 +70,17 @@ extra-riscv64-build -- -d "$CACHE_DIR:/var/cache/pacman/pkg"
 
 ### Q&A
 
+* 我有一些额外资讯，如何附带在包的标签上呢？
+
+在命令 `/mark package status` status 之后的所有字符都会当作附录加入标签里。
+比如你想说 neovim 包因为上游的一个改动导致编译失败了，可以这样用机器人：
+
+```text
+/mark package upstreamed Fail to build because https://github.com/xxxxxxx
+                         ^
+                         从这里开始的所有文字都会被记录
+```
+
 * 有的包有 FTBFS 状态，但是却能在本地成功构建
 
 可能最近包修好了没有 rebuild，使用机器人命令 `/mark PACKAGE ready` 让肥猫知道，
