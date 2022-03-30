@@ -119,6 +119,11 @@ extra-riscv64-build -- -d "$CACHE_DIR:/var/cache/pacman/pkg"
 
 当 aaa 更新的时候，xxx 这个包就会被自动解除依赖过期标记，同时你也会被通知。
 
+* 标了 failing 的包是什么意思
+
+标记 failing 的包都是最近一次构建失败的，同时机器人会标记上 failing 的时间。
+你可以把鼠标移动到 failing 的文字上来查看额外讯息。
+
 * 可用的 mark 包括
 
 unknown, upstreamed, outdated, outdated_dep, stuck, noqemu, ready, pending
