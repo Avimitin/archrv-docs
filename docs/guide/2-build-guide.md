@@ -1,84 +1,100 @@
-# 构建指引
+# 工作流介绍
 
-我们的工作是把 https://archriscv.felixc.at/.status/status.htm
-上的包都处理好。
+肥猫（项目主负责人）会不断的将 x86-64 源里的软件包脚本在 RISC-V 上进行编译。
+成功的将会直接加入 RISC-V 的源里，失败的会把日志文件放在
+<https://archriscv.felixc.at/.status/status.htm> 里并对这个包标记上 FTBFS 标志。
+FTBFS 是 "Fail To Build From Source" 的缩写。我们的任务就是尝试修复这些包。
 
-在状态页里，有两种状态的包裹需要我们处理。
+日常你不需要在上面那个网页搜，我们还有一个工会页记录了包的状态：
 
-## FTBFS (Fail To Build From Source)
+<https://plct-archrv.ax64.workers.dev/>
 
-这个状态代表包无法构建，等待我们修复。基本流程如下：
+其中，左边是包的名字，点击包的名字可以直接跳转到上一次包构建的日志。
+你需要注意看右边的 mark 标记，上面会记录着每一个包当前的状态。
+你可以把鼠标移动到标记上来查看详细信息。
 
-1. 在 [archlinuxriscv](https://github.com/felixonmars/archriscv-packages)
-repository 找这个包相关的 PR
-2. 在工会页 https://plct-archrv.ax64.workers.dev/
-上查看这个包的状态（是否有人在处理了）
-3. 使用命令 /add `{PKGNAME}` 领取这个包
-4. 修复
-5. 提交 PR 并等待合并
-6. 使用命令 /merge `{PKGNAME}` 释放包裹
+## 领取包
 
----
+找到一个想修的包，查看第三排的状态，看看是不是已经有人正在修，或者已经修好了。
+如果是一个没人处理的包，你可以到群里用 `/add` 命令来获取这个包的锁，让同事
+知道你已经在处理这个包了。比如你现在想修 rust，那么发送 `/add rust` 即可。
 
-还有一些很久都没出包的包，那肯定也是挂了。如果连 log 都没有，说明还没
-进 build() 就挂了，这种可能是 checksum 不对。
+> 如果你是普通路人，那么只需要去仓库看看有没有冲突 pr 即可。
+
+## 修包
+
+1. 下载构建脚本文件
+
+```console
+asp checkout rust
+```
+
+2. 修改架构
+
+上一步的命令会将上游的构建脚本 clone 到当前文件夹。
+你需要进入包目录下的 trunk 目录，修改 PKGBUILD 的构建架构。
+
+```console
+cd rust/trunk
+setconf PKGBUILD "('x86_64' 'riscv64')"
+```
+
+这一步可以允许我们在 riscv64 架构下运行这个编译脚本。
+
+3. 创建缓存文件夹
+
+我们还需要构建一个文件夹作为包的缓存。在编译过程中，pacman 会下载脚本
+需要的依赖包，如果缓存文件夹复用，不干净就会导致构建时依赖安装失败等问题。
+
+```console
+# 你可以直接创建一个固定的文件夹
+mkdir ~/.cache/pkgcache
+
+# 也可以随便创建一个临时文件夹
+mktemp -d -t "pkgcache_XXX"
+```
+
+4. 开始构建
+
+安装好 archlinuxcn 源里的 devtools 之后，我们会有 RISC-V 专用的
+`extra-riscv64-build` 工具来帮助我们构建。
+
+```console
+export CACHE_DIR="YOUR CACHE DIRECTORY"
+extra-riscv64-build -- -d "$CACHE_DIR:/var/cache/pacman/pkg"
+```
+
+这里的 -d 函数会把 `$CACHE_DIR` 到 `/var/cache/pacman/pkg` 的路径映射参数
+传到下一层的 makechrootpkg 程序。在 chroot 里下载的软件包可以在 `$CACHE_DIR`
+里找到。
 
 ### Q&A
 
-* 修是怎么一个流程呢？
-
-在 devtools 的打包教程里，你应该用过了 asp 这个工具。
-修包的流程和那个流程相似，具体就是 `asp checkout`，进入 trunk 文件夹，
-修改 PKGBUILD 或者源码尝试构建并运行。修好之后：把修好的源码发回上游/
-把 PKGBUILD 的补丁发到肥猫仓库。
-
-> Reference
->
-> https://github.com/felixonmars/archriscv-packages/wiki/asp-%E4%BD%BF%E7%94%A8%E5%8F%82%E8%80%83
-
-* 怎么构建 PKGBUILD 呢？
-
-假设你要构建 `PACKAGE` 这个包，用 `asp checkout PACKAGE` 之后，当前目录
-会有一个同名的文件夹。用 `cd PACKAGE/trunk` 进入文件夹之后，把 arch 修改成
-riscv [`(ref)`](../record/collection#xx-is-not-available-for-the-riscv64-architecture)
-之后，创建一个干净的文件夹，使用 extra-riscv64-build 进行构建。
-
-```console title=console
-# Create a temporary directory and add the path to variable BUILD_DIR
-export BUILD_DIR=$(mktemp -d -t "pacman_cache_$(date +%m%d)_XXX")
-
-# Use the temporary directory to store pacman cache
-extra-riscv64-build -- -d "$BUILD_DIR:/var/cache/pacman/pkg"
-```
-
 * 有的包有 FTBFS 状态，但是却能在本地成功构建
 
-可能是版本更新之类的问题，使用机器人命令 `/mark PACKAGE ready`
-标记这个包为等待状态。
+可能最近包修好了没有 rebuild，使用机器人命令 `/mark PACKAGE ready` 让肥猫知道，
+等肥猫重新编译。
 
----
+* 修复了几次也修不好，或者包特别难修，比如很多 x86 的汇编，想转让给别人来修：
 
-或者这个包原本依赖过时，现在又能用了，那也可以标记 ready。(仍需讨论)
-
-* 修复了几次也修不好
-
-`/mark PKGNAME stuck`
+```text
+/mark PKGNAME stuck
+/drop PKGNAME
+```
 
 * 释放一个包裹
 
-`/merge PKGNAME`
+`/drop PKGNAME`
 
 * 撤销标记
 
-`/unmark PKGNAME` `STATUS`
-
-* /unmark 用法：
-
-`/mark pkg status`
+`/unmark PKGNAME STATUS`
 
 * 什么时候标记 QEMU？
 
-只有比如说测试跑不过，或者 qemu 神奇 bug 导致的，才标 #noqemu
+只有比如说测试跑不过，或者 qemu 神奇 bug 导致的，才标 #noqemu。
+
+注意，如果只有 QEMU 里才会出错，开发板没有问题的话，不要修，直接标 qemu。
 
 * 什么时候标记 outdated_dep？
 
@@ -110,11 +126,10 @@ https://plct-archrv.ax64.workers.dev/?mkby=*-x64,%E7%93%9C
 https://plct-archrv.ax64.workers.dev/?sort=work
 ```
 
-## Leaf package, port it!
+# Leaf package, port it!
 
-这些是尚未来得及构建的包，你有空可以搞这些包。
+在肥猫的包状态页里，有些包被标记了 leaf 状态。
 
-如果能直接构建成功，回复 `PACKAGE NAME` 直接出包
-到[这条消息上](https://t.me/c/1525629125/11840)。
+这些是尚未来得及构建的包，如果没什么好修的包，你可以处理一下他们。
 
-如果构建失败，那么就把这个包当作 FTBFS 来修。
+如果构建失败，那么就把这个包当作 FTBFS 来修，如果构建成功，标记一个 ready 通知肥猫即可。
