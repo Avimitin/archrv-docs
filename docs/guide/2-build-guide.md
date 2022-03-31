@@ -36,7 +36,7 @@ asp checkout rust
 
 ```console
 cd rust/trunk
-setconf PKGBUILD "('x86_64' 'riscv64')"
+setconf PKGBUILD arch "('x86_64' 'riscv64')"
 ```
 
 这一步可以允许我们在 riscv64 架构下运行这个编译脚本。
