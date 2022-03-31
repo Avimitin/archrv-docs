@@ -138,3 +138,8 @@ error: failed to run `rustc` to learn about target-specific information
 这种包的修法就是把 PKGBUILD 里的 `--target` 参数给删掉即可。
 
 参考：<https://github.com/felixonmars/archriscv-packages/pull/1025/commits/1a2691a1f5a42cbbe375cfaa15e6ae6f12b100ac>
+
+### 编译直接卡住不动了
+
+`sudo htop` 找找看 rustc 是不是 `Z` 状态了，是的话就杀掉重新再来。
+QEMU 的特有 bug。
