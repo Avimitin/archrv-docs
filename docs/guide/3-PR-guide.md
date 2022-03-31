@@ -103,6 +103,15 @@ md5sums=('286e427b10f4d10aaeef1944210a2ea6'
 
 ## 其他规范
 
+### `source` 上游文件名问题
+
+建议给 src 引用的文件取独特的名字，比如
+
+`${pkgname}-xxxpatch::https://...`
+
+因为从 source 数组里下载的文件都会放进 SRCDEST 里，有概率和别的包下载的东西同名，
+然后 archbuild 以为下载过了就直接用，然后 checksum 就对不上了。
+
 ### 上游已经修复编译错误但还没发版本
 
 记得测试一下 x86 会不会有编译失败的问题，优先给 Arch Linux 提交补丁。
