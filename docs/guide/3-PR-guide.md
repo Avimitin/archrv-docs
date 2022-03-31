@@ -70,10 +70,6 @@ git diff --no-prefix | sed 's/trunk\///' > riscv64.patch
 git diff --no-index --no-prefix PKGBUILD.orig PKGBUILD | filterdiff --clean --strip=1 > riscv64.patch
 ```
 
-现在 GitHub 也已经提供了超链接跳转，点击即可跳转。
-
-![image](../asserts/github-pr-patch-button.png)
-
 ## 提交 PR 的一些格式注意事项
 
 ### 数组的格式
@@ -155,6 +151,9 @@ md5sums=('286e427b10f4d10aaeef1944210a2ea6'
 > 
 > +...kages/pull/470.patch
 > ```
+> 现在 GitHub 也已经提供了超链接跳转，点击即可跳转。
+
+![image](../asserts/github-pr-patch-button.png)
 
 ### 本地版本过老
 
