@@ -20,29 +20,7 @@ Firefox 的话，引入 lld 会带来另外的问题。lld 是需要默认关闭
 
 ## pthread related issue
 
-如果是 pthread 引起的 atomic 引用最好找 `-lpthread` 替换成 `-pthread`。
-
-gcc/clang应该从十几年前就要求用 -pthread 了，现在还残留的 -lpthread
-绝大多数是写错了。
-
-给上游提交的时候可以说：
-
-```text
-This has been already discussed lengthly in GCC.
-The answer is that -lpthead is only linking with the thread library,
-while -pthread actually means enabling thread support,
-which includes in the case of riscv64 -latomic,
-but also correctly define some macros when compiling code.
-In short this is not considered as a GCC bug.
-```
-
-StackOverflow 也有相关讨论：
-  https://stackoverflow.com/questions/23250863/difference-between-pthread-and-lpthread-while-compiling
-
----
-
-关于如何跟上游对线的参考：
-<https://github.com/juce-framework/JUCE/issues/995>
+标准答案： [PR #1035](https://github.com/felixonmars/archriscv-packages/pull/1035)
 
 ## gcc atomic
 
