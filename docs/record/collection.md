@@ -255,16 +255,13 @@ Intel 的一些包，没留 Generic 实现，只有 x86 simd 的，比如 hypers
 
 ## XX is not available for the 'riscv64' architecture
 
-有些包需要修改 arch 的值才能编译，
-否则会遇到 `==> ERROR: cern-vdt is not available for the 'riscv64' architecture`。
+这是因为 PKGBUILD 的 arch 数组设置 riscv64 的值。
+请不要把 arch 改为 any，any 表示不同架构出的包二进制上没有区别。
 
-但请不要把 arch 改为 any，这里填 `riscv64` 即可。
-
-你可以用 sed 快速替换值：
+你可以用 setconf 重新设置值：
 
 ```console title=console
-# sed doesn't support Extend RegEx(ERE) by default, need `-E` option to manually enable
-sed -i -E "s/arch=\('?x86_64'?\)/arch=\('riscv64'\)/" PKGBUILD
+setconf PKGBUILD arch '(riscv64 x86_64)'
 ```
 
 还有请注意

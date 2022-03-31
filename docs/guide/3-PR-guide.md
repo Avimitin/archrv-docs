@@ -95,9 +95,6 @@ md5sums=('286e427b10f4d10aaeef1944210a2ea6'
 
 肥猫的构建脚本会把这个处理好，在 PR 的时候不用提交对 arch 的修改。
 
-初次之外 any 表示不同架构出的包二进制上没有区别，
-这种包不需要 PR。
-
 > Reference:
 > https://github.com/felixonmars/archriscv-packages/pull/488/commits/116365a132e9e973ab152514d59ed6688fdc3799
 
