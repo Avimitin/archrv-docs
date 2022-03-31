@@ -155,7 +155,7 @@ std::cout << alignof(typename identity<float>::type) << std::endl;
 
 ## noqemu
 
-能 patch 使用 generic 分支的就不要 noqemu
+能 patch 使用 generic 分支的就不要 noqemu，如果 qemu 过不了板子能过，不要修。
 
 ## Rust
 
@@ -163,22 +163,7 @@ std::cout << alignof(typename identity<float>::type) << std::endl;
 
 ## SSE Related issue
 
-Disable the build flag:
-
-```diff title=riscv64.patch
-+    -DOCIO_USE_SSE=OFF
-```
-
-Delete build flag:
-
-```diff title=riscv64.patch
- build() {
-   cd SuiteSparse-$pkgver
-
--  BLAS=-lblas LAPACK=-llapack TBB=-ltbb SPQR_CONFIG=-DHAVE_TBB MY_METIS_LIB=/usr/lib/libmetis.so make
-+  BLAS=-lblas LAPACK=-llapack MY_METIS_LIB=/usr/lib/libmetis.so make
- }
-```
+放到 riscv 板子上跑，然后标 noqemu
 
 ## Go
 
