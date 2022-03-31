@@ -1,0 +1,30 @@
+name: Build doc and deploy
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  docs:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '17'
+      - run: npm install
+      - run: npm run build
+      - name: Deploy
+        env:
+          USER: 'DocsBuilder'
+          EMAIL: 'avimitin@gmail.com'
+          REPO: 'github.com/Avimitin/archrv-docs'
+          TOKEN: ${{ secrets.GH_TOKEN }}
+          BRANCH: 'docs'
+        run: |
+          git config --global user.name $USER
+          git config --global user.email $EMAIL
+          cd build && git init -b $BRANCH && git add .
+          git commit -m "Generate new static pages"
+          git push --force "https://$TOKEN@$REPO" $BRANCH:$BRANCH
