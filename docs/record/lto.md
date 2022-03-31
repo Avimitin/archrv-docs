@@ -38,9 +38,20 @@
 /usr/bin/ld: project.abcdeg.xxx.xxx.o: undefined reference to `xxxxx`
 ```
 
+### Go 包
+
+需要调整 ldflags：
+
+```bash
+-ldflags "-extldflags \"${LDFLAGS} -Wl,-plugin-opt=-target-abi=lp64d\" \
+```
+
+参考： <https://github.com/felixonmars/archriscv-packages/pull/779/files>
+
 ### 其他
 
 - clang 没过 sancheck
+
 - `ld: /tmp/lto-llvm-*.o: can't link soft-float modules with double-float modules`[^1]
 
-[^1]: 其实这个并不完全是 lto 的锅，只是 lto 的时候错误的假设了 float 的情况。
+给 CXXFLAG 增加新的参数：参考 [PR #992](https://github.com/felixonmars/archriscv-packages/pull/992/commits/1b6f7c13473c29596eb099ff81b4d36d98e90cac#diff-5a99e2973728170e49231a1de53f1fbf9415b586fb4e1d6ace7bc6b634b7693dR9)
