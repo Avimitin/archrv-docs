@@ -7,10 +7,6 @@
 有无问题，如果查不出来问题的话，
 默认认为阿里云的虚拟化有问题。
 
-## 把 jemallocator 换成 tikv-jemallocator
-
-Read: https://github.com/meilisearch/MeiliSearch/pull/1692
-
 ## Executable "wasm-ld" doesn't exist! (STUCK)
 
 要安装 lld，wasm-ld 只在 lld 里面有。

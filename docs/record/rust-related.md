@@ -6,6 +6,15 @@
 
 ## 我遇到的一些错误
 
+## jemallocator 依赖不支持 riscv
+
+把上游的 jemallocator 依赖换成 tikv-jemallocator。Rust 官方已经更换了。
+
+参考: 
+
+* https://github.com/meilisearch/MeiliSearch/pull/1692
+* https://github.com/valeriansaliou/sonic/pull/275
+
 ### riscv64gc-unknown-linux-gnu
 
 这个问题源自于 Rust 和 LLVM 的 Triple 定义不一致。
