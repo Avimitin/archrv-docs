@@ -124,3 +124,17 @@ Example: `signal:11, SIGSEGV: invalid memory reference` 。
 
 可能的解决方案：把 `opt-level` 调低到 2 或者 1 试试。
 
+### --target 的问题
+
+错误：
+
+```
+error: failed to run `rustc` to learn about target-specific information
+```
+
+解决方案：
+
+恭喜你找到最简单的包了，这个问题和上面说的 triple 问题相关。
+这种包的修法就是把 PKGBUILD 里的 `--target` 参数给删掉即可。
+
+参考：<https://github.com/felixonmars/archriscv-packages/pull/1025/commits/1a2691a1f5a42cbbe375cfaa15e6ae6f12b100ac>
