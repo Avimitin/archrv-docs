@@ -142,7 +142,7 @@ std::cout << alignof(typename identity<float>::type) << std::endl;
 > Reference:
 > https://github.com/felixonmars/archriscv-packages/pull/559
 
-## 如何快捷生成 sum
+## 如何快捷生成 sha256sums
 
 用 [updpkgsums](https://archlinux.org/packages/community/x86_64/pacman-contrib/)
 
