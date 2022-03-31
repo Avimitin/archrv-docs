@@ -284,8 +284,23 @@ Error: `c++: error: unrecognized command-line option '-msse'`
 ---
 
 如果遇到了 `gpg: keyserver receive failed: No data` 这样的错误，
-大概率是 keyserver 被橄榄了。建议直接去项目主页找他们的 public key
-手动导入。
+大概率是 keyserver 被橄榄了。
+
+你可以先尝试在下面几个 sks 镜像看看能不能找到：
+
+```
+https://pgp.surfnet.nl/
+pgp.uni-mainz.de 11370
+pgp.circl.lu 11370
+keys.andreas-puls.de 11370
+```
+
+使用 `gpg --keyserver https://example.com --recv-key keyid` 来指定下载服务器。
+
+如果还是找不到，可以找找他们项目主页，团队介绍，个人博客等等等页面。
+
+找到了 key 之后把 key 和 riscv64.patch 放一起，然后到上游报 bug。
+Arch Linux 最近通过了把 key 放到 SVN 的 RFC，等 Arch 也有 key 了我们就可以删掉了。
 
 > sks pool 因为是单增的，无法满足 GDPR 对被遗忘权的规定，
 > 被欧盟法律橄榄了。
