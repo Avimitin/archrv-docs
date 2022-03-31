@@ -56,6 +56,11 @@ const config = {
             label: 'Documents',
           },
           {
+            to: 'blog',
+            label: 'Blog',
+            position: 'left'
+          },
+          {
             href: 'https://github.com/felixonmars/archriscv-packages',
             label: 'GitHub',
             position: 'right',
