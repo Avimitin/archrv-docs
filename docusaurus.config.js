@@ -24,13 +24,13 @@ const config = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
-          editUrl: 'https://github.com/Avimitin/RISC-V_Daily_Notes',
+          editUrl: 'https://github.com/Avimitin/archrv-docs',
         },
         blog: {
           showReadingTime: true,
           // Please change this to your repo.
           editUrl:
-            'https://github.com/Avimitin/RISC-V_Daily_Notes',
+            'https://github.com/Avimitin/archrv-docs',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
