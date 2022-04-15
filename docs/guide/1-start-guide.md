@@ -30,7 +30,7 @@ Arch Linux CN 源指引：[usage](https://github.com/archlinuxcn/repo#usage)
 然后执行
 
 ```console
-pacman -Syu devtools
+pacman -Syu devtools-riscv64
 ```
 
 ## 开始修包！
