@@ -407,3 +407,8 @@ x86_64 和 riscv64 下的 any 包的名字是一样的，但是这两个的签�
 ```bash
 SYSTEMD_NSPAWN_TMPFS_TMP=0 extra-x86_64-build
 ```
+
+## 大量依赖缺失
+
+不一定是所有依赖都不匹配，pacman 是 `depends=(a, b, c, d, e)`，
+然后如果 e 缺了它会说 `a b c d e not found`。
