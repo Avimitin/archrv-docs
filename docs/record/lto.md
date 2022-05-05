@@ -52,6 +52,8 @@
 
 - clang 没过 sancheck
 
-- `ld: /tmp/lto-llvm-*.o: can't link soft-float modules with double-float modules`[^1]
+- `ld: /tmp/lto-llvm-*.o: can't link soft-float modules with double-float modules`
 
-给 CXXFLAG 增加新的参数：参考 [PR #992](https://github.com/felixonmars/archriscv-packages/pull/992/commits/1b6f7c13473c29596eb099ff81b4d36d98e90cac#diff-5a99e2973728170e49231a1de53f1fbf9415b586fb4e1d6ace7bc6b634b7693dR9)
+   * 给 CXXFLAG 增加新的参数：参考 [PR #992](https://github.com/felixonmars/archriscv-packages/pull/992/commits/1b6f7c13473c29596eb099ff81b4d36d98e90cac#diff-5a99e2973728170e49231a1de53f1fbf9415b586fb4e1d6ace7bc6b634b7693dR9)
+   * 如果使用 clang 来编译，clang 可能不认 `CFLAGS` 和 `CXXFLAGS` 里的 `-Wl,...`，
+   这个时候你就需要给 `LDFLAGS` 传。具体可以参考 [PR #1230](https://github.com/felixonmars/archriscv-packages/pull/1230/files)
