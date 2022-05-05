@@ -382,3 +382,16 @@ x86_64 和 riscv64 下的 any 包的名字是一样的，但是这两个的签�
 
 - 自建 cache 目录
 - 删了缓存重新跑构建
+
+## 磁盘占用满了
+
+`lto: fatal error: write: No space left on device`
+
+很有可能不是真的吃满了，是因为 devtools 使用了 systemd-nspawn，而后者默认用参数 `size=10%`
+挂载在 `/tmp` 目录上。
+
+可以尝试调整 `SYSTEMD_NSPAWN_TMPFS_TMP` 这个变量的值来拒绝挂载 tmpfs
+
+```bash
+SYSTEMD_NSPAWN_TMPFS_TMP=0 extra-x86_64-build
+```
