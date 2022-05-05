@@ -97,6 +97,18 @@ std::cout << alignof(typename identity<float>::type) << std::endl;
 > of this semantic disaster is for it to ignore all such attributes on template type
 > arguments.
 
+- 一些参考解决方案：
+
+   * <https://github.com/savoirfairelinux/opendht/pull/598/files>
+   * 如何检查 libatomic: <https://github.com/danvratil/qcoro/pull/52/commits/312f2fca861b4c623481da58241a1139e013ef83>
+
+- 给上游看的解释范例：
+
+   * <https://github.com/savoirfairelinux/opendht/pull/598#issuecomment-1086945416>
+   * <https://github.com/telegramdesktop/tdesktop/pull/24275>
+   * 证明建立"你显式用了atomic"和"你得检查libatomic"直接关系的参考文档:
+   <https://gcc.gnu.org/onlinedocs/libstdc++/manual/using_concurrency.html>
+
 ## -fno-common
 
 **Q**: -fno-common 取代了 -fcommon, 这种情况优先 -fno-common 还是 patch source？
