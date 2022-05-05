@@ -137,6 +137,7 @@ unknown, upstreamed, outdated, outdated_dep, stuck, noqemu, ready, pending
   * mark: 包的标记 (和 bot 的标记一样)，
   * mkby: 打标记的人名 (可以用来追踪 outdated)，
   * sort: 可以 sort=name, sort=user, sort=mark, sort=work...。也可以组合使用
+  * expandAllComments: 展开所有的标记
 
 比如你要查询谁打过标记：
 
