@@ -283,6 +283,9 @@ Error: `c++: error: unrecognized command-line option '-msse'`
 如果遇到了 `gpg: keyserver receive failed: No data` 这样的错误，
 大概率是 keyserver 被橄榄了。
 
+> sks pool 因为是单增的，无法满足 GDPR 对被遗忘权的规定，
+> 被欧盟法律橄榄了。
+
 你可以先尝试在下面几个 sks 镜像看看能不能找到：
 
 ```
@@ -296,15 +299,22 @@ keys.andreas-puls.de 11370
 
 如果还是找不到，可以找找他们项目主页，团队介绍，个人博客等等等页面。
 
-找到了 key 之后把 key 和 riscv64.patch 放一起，然后到上游报 bug。
-Arch Linux 最近通过了把 key 放到 SVN 的 RFC，等 Arch 也有 key 了我们就可以删掉了。
+如果是 GitHub 的项目，你可以找到那个开发者的主页，然后在后面加上 `.gpg` 来查看他的 key。
 
-> sks pool 因为是单增的，无法满足 GDPR 对被遗忘权的规定，
-> 被欧盟法律橄榄了。
+```text
+https://github.com/user.gpg
+                       ^^^^
+```
+
+然后用 gpg import 导入： `curl https://github.com/user.gpg | gpg --import`
+
+Arch Linux 最近通过了把 key 放到 SVN 的 RFC，等 Arch 也有 key 了我们就可以删掉了。
+如果找不到 key 就到上游开 bug report 让他们把 key 放到 svn。
+如果你找到了 key，可以先把 key 和 riscv64.patch 放一起提交到肥猫仓库。
 
 ---
 
-如果实在是找不到 key，可以用参数 `--skippgpcheck` 暂时跳过检查。
+如果实在是找不到 key，但是又急着测试，可以用参数 `--skippgpcheck` 暂时跳过检查。
 
 ```bash
 extra-riscv64-build -- -d "..." -- --skippgpcheck
