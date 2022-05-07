@@ -273,7 +273,7 @@ Error: `c++: error: unrecognized command-line option '-msse'`
 
 比如 `cmake -DSSE=OFF`。
 
-## Unknown public key `[a-zA-Z0-9]+`
+## Unknown public key....
 
 这是因为本地的 gpg 数据库没有这个开发者的公钥。你可以用命令
 `gpg --recv-key keyid` 下载并导入这个 key。
@@ -305,6 +305,11 @@ Arch Linux 最近通过了把 key 放到 SVN 的 RFC，等 Arch 也有 key 了�
 ---
 
 如果实在是找不到 key，可以用参数 `--skippgpcheck` 暂时跳过检查。
+
+```bash
+extra-riscv64-build -- -d "..." -- --skippgpcheck
+                                 # ^^^^^^^^^^^^^^^^^ 多用一个 -- 把 skippgpcheck 传给更下层的 makepkg
+```
 
 或者可以参考这个：
 <https://github.com/archlinuxcn/lilac/blob/master/recv_gpg_keys>
