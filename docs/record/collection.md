@@ -427,3 +427,19 @@ SYSTEMD_NSPAWN_TMPFS_TMP=0 extra-x86_64-build
 
 不一定是所有依赖都不匹配，pacman 是 `depends=(a, b, c, d, e)`，
 然后如果 e 缺了它会说 `a b c d e not found`。
+
+## config.guess
+
+如果遇到
+
+```text
+config.guess fail to detect system type
+```
+
+使用 `autoreconf -fi` 更新附带文件，同时向上游报告它们的文件需要更新。
+如果因为版本过老使用命令失败的，拷贝
+`/usr/share/autoconf/build-aux/config.guess` 和 `config.sub` 文件，并向上游报告
+
+> **请一定要向上游报告！**
+>
+> config.sub 上游就不应该发，或者发行版不应该用上游含这个的发布，或者上游应该更新
