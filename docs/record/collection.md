@@ -169,6 +169,26 @@ std::cout << alignof(typename identity<float>::type) << std::endl;
 
 能 patch 使用 generic 分支的就不要 noqemu，如果 qemu 过不了板子能过，不要修。
 
+- 为什么我们不尝试对 qemu user 进行修复呢？
+
+现在我们遇到好几个 qemu 挂死的版本，我们维护了好几个版本
+
+   1. 首先是这个 always-malloc，我们手打了个 glib，
+   稍微缓解了一些 <https://github.com/ZenithalHourlyRate/glib>
+   2. 然后 qemu 在 futex pi 这个 syscall 上翻译不行，
+   这在某些 glibc 版本下会导致 pthread 挂（影响所有 qemu-user 版本，不只 riscv），
+   然后粗糙搓了一个 <https://github.com/ZenithalHourlyRate/qemu>
+   3. 我们还发现一些情况下进程会 Z 掉（打 rust 的时候），我们猜测和这个
+   issue 有关 <https://gitlab.com/qemu-project/qemu/-/issues/140> ，
+   但看起来非常 non-trivial 不好修，称其为 vfork 吧
+   4. 在 always-malloc 修了以后，我们依然会遇到和 1 一样的 futex hang
+   的问题（打 go 的时候），我们还没调查咋回事
+
+- 为什么要选择手动维护 noqemu blacklist 这种看似低效的方式呢？
+
+根据测试，QEMU-User 编译速度大于 RISC-V 板子大于 QEMU-System，
+手工维护 noqemu blacklist 其实效率反而更高一些。
+
 ## Rust
 
 参考 [_Rust 相关的一些记录_](./rust-related)
@@ -442,4 +462,4 @@ config.guess fail to detect system type
 
 > **请一定要向上游报告！**
 >
-> config.sub 上游就不应该发，或者发行版不应该用上游含这个的发布，或者上游应该更新
+> config.sub 上游有职责及时更新。
