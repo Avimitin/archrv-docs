@@ -1,3 +1,5 @@
+<!-- vim: set ft=markdown: -->
+
 # 工作流介绍
 
 肥猫（项目主负责人）会不断的将 x86-64 源里的软件包脚本在 RISC-V 上进行编译。
@@ -163,3 +165,15 @@ https://plct-archrv.ax64.workers.dev/?sort=work
 
 rotten 代表原来这个包的 patch 打不上了。这通常是因为 Arch Linux 的上游 PKGBUILD 更新了导致
 patch 对不上位置。这样的包有很多，而且通常很简单，请尽量修复。
+
+# 黑名单
+
+有一些包完全没有在 RISC-V 上打的必要，比如 intel 系列，闭源 binary 包等等。
+所以在尝试打包前，先确认这个包在 RISC-V 上是否有打的必要。
+如果没有，用 bot 给这些包打上 ignore 标签。
+
+## 目前的黑名单
+
+import RenderBlacklist from "@site/src/components/RenderBlacklist"
+
+<RenderBlacklist/>

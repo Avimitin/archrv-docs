@@ -36,4 +36,4 @@ pacman -Syu devtools-riscv64
 ## 开始修包！
 
 上面两步做好之后就可以了解我们的工作流并尝试打包了。
-详细请看 [构建相关](./2-build-guide.md) 。
+详细请看 [构建相关](./2-build-guide.mdx) 。
