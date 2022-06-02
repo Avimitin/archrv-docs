@@ -26,6 +26,23 @@
 比如添加 make 参数， 修改 cflags 之类的。
 用 `#` 在修改旁注释需要写一下这么修改的原因。
 
+## PR 的流程
+
+1. 每一次修改都从 master 分支的头创建一个新的分支，分支名可以随意，
+通常我们用包的名字来当分支名。
+2. 创建一个和包名字同名的文件夹，把从 PKGBUILD 生成的 riscv64.patch 文件，
+和对源码修改的 patch 放在同一个文件夹。
+3. commit 并发起 PR
+
+### Commit Title
+
+- 如果当前仓库没有这个包的 patch，标题用 `addpkg: pkgname`
+- 如果你的 PR 是对原有包的修改，标题用 `upgpkg: pkgname`
+- 如果你的 PR 是删除掉仓库内的 patch，标题用 `rmvpkg: pkgname`
+
+同时强烈建议不要只用 `git commit -m "title"`，建议在 commit body 里
+写清楚这次修改的内容和原因。然后在 PR 的信息里也要写清楚。
+
 ## 如何创建 patch
 
 - 如果你还未 stage 修改：
