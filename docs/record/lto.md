@@ -18,7 +18,7 @@
 在 PKGBUILD 里加上一行：
 
 ```diff
-+options(!lto)
+options+=(!lto)
 ```
 
 可以把 lto 关闭。
