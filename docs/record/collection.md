@@ -443,6 +443,8 @@ x86_64 和 riscv64 下的 any 包的名字是一样的，但是这两个的签�
 SYSTEMD_NSPAWN_TMPFS_TMP=0 extra-x86_64-build
 ```
 
+> 记得需要加上 sudo 用 root 跑，不然 devtools 自己 sudo 了之后，这个环境变量就没了。
+
 ## 大量依赖缺失
 
 不一定是所有依赖都不匹配，pacman 是 `depends=(a, b, c, d, e)`，
