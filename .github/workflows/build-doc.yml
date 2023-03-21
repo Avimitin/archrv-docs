@@ -18,9 +18,9 @@ jobs:
       - name: Deploy
         env:
           USER: 'DocsBuilder'
-          EMAIL: 'avimitin@gmail.com'
+          EMAIL: 'archrv-docs@avimit.in'
           REPO: 'github.com/Avimitin/archrv-docs'
-          TOKEN: ${{ secrets.GH_TOKEN }}
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: 'docs'
         run: |
           git config --global user.name $USER
