@@ -465,3 +465,18 @@ config.guess fail to detect system type
 > **请一定要向上游报告！**
 >
 > config.sub 上游有职责及时更新。
+
+## nodejs 的某些包出现怪异的错误
+
+比如, babel 打印一行不明所以的报错然后退出.
+
+```text
+{ valid: true, value: null }
+```
+
+这是因为目前 riscv64 上的 V8 的 JIT 有 Bug.
+
+可以尝试下面两种方法
+
+- 设置环境变量 `NODE_OPTIONS='--jitless'` 或者给 node 传 `--jitless`. 但是这会一并禁用 WebAssembly. 好处是用环境变量传递不用 patch 代码
+- 给 Node 加上 `--max-opt=0` 参数. 这实际上是一个 V8 的参数. 这个参数不能通过环境变量传递, 需要 patch 代码, 但是不会禁用 WebAssembly.
