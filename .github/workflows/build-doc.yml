@@ -27,4 +27,4 @@ jobs:
           git config --global user.email $EMAIL
           cd build && git init -b $BRANCH && git add .
           git commit -m "Generate new static pages"
-          git push --force "https://$TOKEN@$REPO" $BRANCH:$BRANCH
+          git push --force "https://Avimitin:$TOKEN@$REPO" $BRANCH:$BRANCH
