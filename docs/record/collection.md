@@ -195,7 +195,9 @@ std::cout << alignof(typename identity<float>::type) << std::endl;
 
 ## SSE Related issue
 
-放到 riscv 板子上跑，然后标 noqemu
+~~放到 riscv 板子上跑，然后标 noqemu~~
+
+现在可以用 simde2 来模拟 SSE2 实现，以提供 SSE2 支持，具体可以参考这个 PR： [#3011](https://github.com/felixonmars/archriscv-packages/pull/3011/files)。
 
 ## Go
 
