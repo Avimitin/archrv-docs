@@ -36,12 +36,26 @@
 
 ### Commit Title
 
-- 如果当前仓库没有这个包的 patch，标题用 `addpkg: pkgname`
-- 如果你的 PR 是对原有包的修改，标题用 `upgpkg: pkgname`
-- 如果你的 PR 是删除掉仓库内的 patch，标题用 `rmvpkg: pkgname`
+- 如果当前仓库没有这个包的 patch，标题用 `addpatch: pkgname`
+- 如果你的 PR 是对原有包的修改，标题用 `updpatch: pkgname`
+- 如果你的 PR 是删除掉仓库内的 patch，标题用 `rmvpatch: pkgname`
+- 如果你的 PR 是对 `qemu-user-blacklist.txt` 的修改，标题用 `qemu-user-blacklist: ` 加上具体修改内容，例：`qemu-user-blacklist: add pkgname`
 
 同时强烈建议不要只用 `git commit -m "title"`，建议在 commit body 里
 写清楚这次修改的内容和原因。然后在 PR 的信息里也要写清楚。
+
+<details>
+<summary>曾经的标题格式</summary>
+
+以前采用的是下面这套标签：
+
+- `addpkg`
+- `updpkg` / `upgpkg`
+- `rmvpkg`
+
+出于向前兼容的考虑，这些标签仍然能够被正常识别，但是它们不太符合本仓库的本质，所以更推荐使用上面提到的格式。
+
+</details>
 
 ## 如何创建 patch
 
