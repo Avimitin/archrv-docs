@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkriscv_package_guide=self.webpackChunkriscv_package_guide||[]).push([[535],{5641:function(e){e.exports=JSON.parse('{"title":"Recent posts","items":[{"title":"\u7ed9 gauche \u5199\u4e2a bootstrap \u811a\u672c","permalink":"/blog/bootstrap-gauch-on-archrv"}]}')}}]);
