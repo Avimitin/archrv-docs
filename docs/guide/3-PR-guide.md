@@ -175,16 +175,21 @@ md5sums=('286e427b10f4d10aaeef1944210a2ea6'
 > 找到 PR 的那条 commit，在 URL 后边加 .patch/.diff 就能拿到 raw contents。
 > 比如
 > [PR #470](https://github.com/felixonmars/archriscv-packages/pull/470/commits/95242a8b610854ef64c8b5e304756ba6a4d4302d),
-> 去掉 commit 后的那一串，直接加上 .patch。
+> 去掉 commit 后的那一串，直接加上 .diff。
 >
 > ```diff title=diff
 > -...kages/pull/470/commits/95242a8b610854ef64c8b5e304756ba6a4d4302d
 > 
-> +...kages/pull/470.patch
+> +...kages/pull/470.diff
 > ```
 > 现在 GitHub 也已经提供了超链接跳转，点击即可跳转。
 
 ![image](../asserts/github-pr-patch-button.png)
+
+<details>
+<summary>推荐使用 .diff</summary>
+GitHub 的 .patch 包含的 patch 头是从 PR 生成的，很可能发生变动，导致打包时下载的 patch 与预先提供的 checksum 不一致。
+</details>
 
 ### 本地版本过老
 
